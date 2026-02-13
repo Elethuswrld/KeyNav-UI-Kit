@@ -1,38 +1,76 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useRef, useState } from "react";
 import SkipLink from './components/SkipLink'
+import Modal from "./components/Modal";
+import HelpModalContent from "./pages/HelpModalContent";
+import { useGlobalHotkeys } from "./hooks/useGlobalHotkeys";
+import ToastRegion from "./components/ToastRegion";
+import { useToast } from "./hooks/useToast";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [helpOpen, setHelpOpen] = useState(false);
+  const helpBtnRef = useRef(null);
+  const { toast, showToast } = useToast();
+
+  useGlobalHotkeys({
+    onHelp: () => setHelpOpen(true),
+    isHelpOpen: helpOpen,
+  });
 
   return (
-    <>
+    <div className="min-h-screen bg-gray-50 text-gray-900">
       <SkipLink />
-      <main id="main" tabIndex={-1} className="p-6">
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
+
+      <header className="sticky top-0 border-b bg-white">
+        <div className="mx-auto flex max-w-4xl items-center justify-between p-4">
+          <span className="font-bold">KeyNav UI Kit</span>
+
+          <button
+            ref={helpBtnRef}
+            onClick={() => setHelpOpen(true)}
+            className="rounded-xl border bg-white px-3 py-2 text-sm hover:bg-gray-100
+                       focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-black"
+            aria-haspopup="dialog"
+          >
+            Keyboard Help (?)
+          </button>
+        </div>
+      </header>
+
+      <main id="main" tabIndex={-1} className="mx-auto max-w-4xl p-6">
+        <h1 className="text-2xl font-bold">Beginner additions ✅</h1>
+        <p className="mt-2 text-gray-600">
+          Try pressing <b>?</b> to open help. Use <b>Tab</b> to move around.
         </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+
+        <div className="mt-6 flex flex-wrap gap-3">
+          <button
+            onClick={() => showToast("Saved successfully ✅")}
+            className="rounded-xl bg-black px-4 py-2 text-white
+                       focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-black"
+          >
+            Save
+          </button>
+          <button
+            onClick={() => showToast("Copied to clipboard 📋")}
+            className="rounded-xl border bg-white px-4 py-2
+                       focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-black"
+          >
+            Copy
+          </button>
+        </div>
       </main>
-    </>
+
+      <Modal
+        isOpen={helpOpen}
+        title="Keyboard Shortcuts"
+        onClose={() => setHelpOpen(false)}
+        restoreFocusRef={helpBtnRef}
+      >
+        <HelpModalContent />
+      </Modal>
+
+      <ToastRegion message={toast} />
+    </div>
   )
 }
 
