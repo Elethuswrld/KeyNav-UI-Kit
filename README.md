@@ -87,3 +87,65 @@ npm install
 
 3. Start the development server
 npm run dev
+
+How to Use
+
+Try navigating the app without using a mouse:
+
+Press Tab to move between elements
+
+Use Enter / Space to activate controls
+
+Use Arrow keys inside dropdowns and tabs
+
+Press Esc to close menus and dialogs
+
+This project is intentionally designed to be explored using keyboard navigation.
+
+🧪 Accessibility Considerations
+
+The implementation focuses on:
+
+Proper ARIA roles and states
+
+Focus trapping for overlays
+
+Restoring focus after closing dialogs
+
+Avoiding keyboard traps
+
+Clear visual focus indicators
+
+Semantic HTML where possible
+
+📚 Learning Outcomes
+
+While building this project, the following concepts were explored:
+
+Roving tab index
+
+Focus management
+
+Menu button pattern
+
+Dialog accessibility
+
+Keyboard event handling
+
+Component-level accessibility testing
+
+📌 Future Improvements
+
+Potential enhancements include:
+
+Automated keyboard interaction tests
+
+Additional components (combobox, command palette)
+
+Accessibility score integration
+
+Design system extraction
+
+📄 License
+
+This project is for educational and portfolio purposes.
