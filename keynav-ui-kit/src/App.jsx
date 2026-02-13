@@ -6,6 +6,7 @@ import { useGlobalHotkeys } from "./hooks/useGlobalHotkeys";
 import ToastRegion from "./components/ToastRegion";
 import { useToast } from "./hooks/useToast";
 import Navbar from "./components/Navbar";
+import DropdownMenu from "./components/DropdownMenu";
 
 function App() {
   const [helpOpen, setHelpOpen] = useState(false);
@@ -45,6 +46,14 @@ function App() {
             Copy
           </button>
         </div>
+
+        <section className="mt-10 space-y-4">
+          <h2 className="text-xl font-semibold">Dropdown Menu</h2>
+          <p className="text-sm text-gray-600">
+            Try: Enter/Space to open, Arrow keys to move, type letters to jump, Esc to close.
+          </p>
+          <DropdownMenu />
+        </section>
 
         <section className="mt-10 space-y-6">
           <h2 className="text-xl font-semibold">Focus Playground</h2>
