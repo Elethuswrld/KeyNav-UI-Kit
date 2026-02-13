@@ -7,6 +7,7 @@ import ToastRegion from "./components/ToastRegion";
 import { useToast } from "./hooks/useToast";
 import Navbar from "./components/Navbar";
 import DropdownMenu from "./components/DropdownMenu";
+import Tabs from "./components/Tabs";
 
 function App() {
   const [helpOpen, setHelpOpen] = useState(false);
@@ -53,6 +54,14 @@ function App() {
             Try: Enter/Space to open, Arrow keys to move, type letters to jump, Esc to close.
           </p>
           <DropdownMenu />
+        </section>
+
+        <section className="mt-10 space-y-4">
+          <h2 className="text-xl font-semibold">ARIA Tabs</h2>
+          <p className="text-sm text-gray-600">
+            Try: ArrowLeft/ArrowRight, Home/End. Only the active tab is in the Tab order.
+          </p>
+          <Tabs />
         </section>
 
         <section className="mt-10 space-y-6">
